@@ -7,6 +7,13 @@ verify_ssl = true
 
 [packages]
 requests = "*"
+pylint = "*"
+pytest = "*"
+mock = "*"
+pyrsistent = "*"
+toolz = "*"
+hypothesis = "*"
+multipledispatch = "*"
 
 [requires]
 python_version = "3.7"
