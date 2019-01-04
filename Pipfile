@@ -15,6 +15,13 @@ toolz = "*"
 hypothesis = "*"
 multipledispatch = "*"
 hask3 = "*"
+mysqlclient = "*"
+elasticsearch = "*"
+rx = "*"
+pymonad = "*"
+streamz = "*"
+networkx = "*"
+graphviz = "*"
 
 [requires]
 python_version = "3.7"
