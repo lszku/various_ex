@@ -57,12 +57,12 @@ def problem003(number):
         max_prime = 2
         number >>= 1
 
-    for i in range(3, int(math.sqrt(number))+1, 2):
+    for i in range(3, int(math.sqrt(number)) + 1, 2):
         while number % i == 0:
             max_prime = i
             number /= i
 
-    if number> 2:
+    if number > 2:
         max_prime = number
 
     return int(max_prime)
@@ -90,3 +90,55 @@ def is_prime(a):
         return False
     else:
         return all(a % i for i in range(3, int(a ** 0.5) + 1))
+
+
+def get_primes(limit):
+    primes = []
+    while limit % 2 == 0:
+        primes.append(2)
+        limit >>= 1
+
+    for i in range(3, int(math.sqrt(limit)) + 1, 2):
+        while limit % i == 0:
+            primes.append(i)
+            # limit /= i
+
+    return primes
+
+
+def problem004(digit_count):
+    '''
+    A palindromic number reads the same both ways. The largest palindrome made
+    from the product of two 2-digit numbers is 9009 = 91 × 99.
+    Find the largest palindrome made from the product of two 3-digit numbers.
+    :return:
+    '''
+    min_val, max_val = get_min_and_max_from_digit_count(digit_count)
+    max_palindrome = -1
+
+    for i in range(min_val, max_val + 1):
+        for j in range(min_val, max_val + 1):
+            product = i * j
+            if is_palindrome(product):
+                if product > max_palindrome:
+                    max_palindrome = product
+
+    return max_palindrome
+
+
+def get_min_and_max_from_digit_count(num):
+    if isinstance(num, int):
+        return int('1' * num), int('9' * num)
+    else:
+        raise Exception("you need provide a number")
+
+
+def is_palindrome(number):
+    '''
+    checks whether the int number is a palindrome
+    :param number:
+    :return:
+    '''
+    str_number = str(number)
+
+    return bool(str_number == str_number[::-1])
