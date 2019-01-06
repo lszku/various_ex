@@ -1,3 +1,4 @@
+import math
 from functools import reduce
 
 
@@ -28,7 +29,7 @@ def problem002(limit):
 
     n = 1
 
-    list_of_fibs = [ n]
+    list_of_fibs = [n]
     while True:
         previous = n
         n = list_of_fibs[-1]
@@ -39,3 +40,53 @@ def problem002(limit):
         list_of_fibs.append(fib)
 
     return sum(filter(lambda x: x % 2 == 0, list_of_fibs))
+
+
+def problem003(number):
+    '''
+    The prime factors of 13195 are 5, 7, 13 and 29.
+    What is the largest prime factor of the number 600851475143 ?
+
+        divide number by 2
+        generate all primes until get that number
+        check max num that divides without reminder
+    '''
+    max_prime = -1
+
+    while number % 2 == 0:
+        max_prime = 2
+        number >>= 1
+
+    for i in range(3, int(math.sqrt(number))+1, 2):
+        while number % i == 0:
+            max_prime = i
+            number /= i
+
+    if number> 2:
+        max_prime = number
+
+    return int(max_prime)
+
+
+def get_prime_sieve(limit):
+    m = limit + 1
+
+    numbers = [True] * m
+    for i in range(2, int(limit ** 0.5 + 1)):
+        if numbers[i]:
+            for j in range(i * i, m, i):
+                numbers[j] = False
+    primes = []
+    for i in range(2, m):
+        if numbers[i]:
+            primes.append(i)
+    return primes
+
+
+def is_prime(a):
+    if a < 2:
+        return False
+    if a != 2 and a % 2 == 0:
+        return False
+    else:
+        return all(a % i for i in range(3, int(a ** 0.5) + 1))
