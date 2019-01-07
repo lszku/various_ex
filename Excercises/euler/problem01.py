@@ -1,4 +1,5 @@
 import math
+import operator
 from functools import reduce
 
 
@@ -142,3 +143,34 @@ def is_palindrome(number):
     str_number = str(number)
 
     return bool(str_number == str_number[::-1])
+
+
+def gcd(a, b):
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a % b)
+
+
+def lcm(a, b):
+    '''
+    lowest
+    :param a:
+    :param b:
+    :return:
+    '''
+    return (a * b) / gcd(a, b)
+
+
+def problem005(to_range_divisible):
+    '''
+    2520 is the smallest number that can be divided by each of the numbers
+    from 1 to 10 without any remainder.
+    What is the smallest positive number that is evenly divisible by all
+    of the numbers from 1 to 20?
+
+    :param to_range_divisible:
+    :return:
+    '''
+    values = list(range(1, to_range_divisible + 1))
+    return int(reduce(lcm, values))

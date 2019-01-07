@@ -2,7 +2,7 @@ import pytest
 
 from Excercises.euler.problem01 import problem001, problem002, problem003, \
     get_prime_sieve, problem004, get_min_and_max_from_digit_count, \
-    is_palindrome
+    is_palindrome, problem005
 
 
 def test_problem001():
@@ -37,7 +37,7 @@ def test_get_primes():
     (3, 906609)
 ]))
 def test_problem004(digit_count, max_palindrome):
-    assert problem004(2) == 9009
+    assert problem004(digit_count) == max_palindrome
 
 
 def test_generate_palindrom():
@@ -56,3 +56,11 @@ def test_get_max_from_digit_count(param, result):
 ]))
 def test_is_palindrome(number, is_pal):
     assert is_palindrome(number) == is_pal
+
+
+@pytest.mark.parametrize("to_range_divisible, smallest_result", [
+    (10, 2520),
+    (20, 232792560)
+])
+def test_problem_005(to_range_divisible, smallest_result):
+    assert problem005(to_range_divisible) == smallest_result
